@@ -1,7 +1,29 @@
-FROM tensorflow/tensorflow:nightly
+#FROM tensorflow/tensorflow:nightly
+FROM ubuntu:18.04 as base_build
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        automake \
+        build-essential \
+        ca-certificates \
         curl \
+        git \
+        libcurl3-dev \
+        libfreetype6-dev \
+        libpng-dev \
+        libtool \
+        libzmq3-dev \
+        mlocate \
+        openjdk-8-jdk\
+        openjdk-8-jre-headless \
+        pkg-config \
+        python-dev \
+        software-properties-common \
+        swig \
+        unzip \
+        wget \
+        zip \
+        zlib1g-dev \
+        python3-distutils \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
