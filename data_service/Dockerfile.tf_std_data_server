@@ -1,4 +1,17 @@
 FROM tensorflow/tensorflow:nightly
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -fSsL -O https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py && \
+    rm get-pip.py
+
+COPY tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl /
+RUN pip3 install --upgrade tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl
+
 COPY tf_std_data_server.py /
-ENTRYPOINT ["python", "-u", "/tf_std_data_server.py"]
+ENTRYPOINT ["python3", "-u", "/tf_std_data_server.py"]
